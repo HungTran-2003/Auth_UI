@@ -1,4 +1,5 @@
 import 'package:auth_ui/ui/app_start/onboarding_pages.dart';
+import 'package:auth_ui/ui/auth/sign_in/sign_in_pages.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/': (BuildContext context) => const Onboarding(),
+        '/sign_in': (BuildContext context) => const SignIn(),
       },
     );
   }

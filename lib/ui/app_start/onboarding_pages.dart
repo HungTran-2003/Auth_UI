@@ -1,6 +1,5 @@
 import 'package:auth_ui/common/app_colors.dart';
 import 'package:auth_ui/common/app_text_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatelessWidget {
@@ -53,7 +52,7 @@ class Onboarding extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        print("Click Login");
+                        Navigator.pushNamed(context, "/sign_in");
                       },
                       style: buttonStyle.copyWith(backgroundColor: WidgetStateProperty.all(AppColors.primary)),
                       child: Text("Login", style: AppTextStyle.whiteS20SemiBold),
