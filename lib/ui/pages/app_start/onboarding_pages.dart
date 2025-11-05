@@ -52,7 +52,7 @@ class Onboarding extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/sign_in");
+                        Navigator.pushReplacementNamed(context, "/sign_in");
                       },
                       style: buttonStyle.copyWith(backgroundColor: WidgetStateProperty.all(AppColors.primary)),
                       child: Text("Login", style: AppTextStyle.whiteS20SemiBold),
@@ -61,7 +61,7 @@ class Onboarding extends StatelessWidget {
 
                   Expanded(
                     child: TextButton( onPressed: () {
-                      print("Click register");
+                      Navigator.pushReplacementNamed(context, "/sign_up");
                     },
                       style: buttonStyle,
                       child: Text("Register", style: AppTextStyle.blackS20SemiBold),

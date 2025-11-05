@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -54,10 +55,16 @@ flutter:
         - asset: assets/fonts/Poppins-Regular.ttf
         - asset: assets/fonts/Poppins-SemiBold.ttf
           weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+
 
   uses-material-design: true
   assets:
-    - assets/images/welcome.png
+    - assets/vectors/icons8_google.svg
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
