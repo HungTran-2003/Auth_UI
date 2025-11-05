@@ -46,6 +46,12 @@ class AppTextStyle {
 
   static const white = TextStyle(color: AppColors.texTWhite, fontFamily: "Poppins");
 
+  //s14
+  static final whiteS14 = white.copyWith(fontSize: 14);
+  static final whiteS14SemiBold = whiteS14.copyWith(fontWeight: FontWeight.w600);
+
+
+
   //s20
   static final whiteS20 = white.copyWith(fontSize: 20);
   static final whiteS20SemiBold = whiteS20.copyWith(fontWeight: FontWeight.w600);

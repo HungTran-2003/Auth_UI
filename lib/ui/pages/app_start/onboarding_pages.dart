@@ -1,5 +1,6 @@
 import 'package:auth_ui/common/app_colors.dart';
 import 'package:auth_ui/common/app_text_style.dart';
+import 'package:auth_ui/ui/widgets/buttons/app_button.dart';
 import 'package:flutter/material.dart';
 
 class Onboarding extends StatelessWidget {
@@ -50,13 +51,9 @@ class Onboarding extends StatelessWidget {
                 spacing: 30,
                 children: [
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, "/sign_in");
-                      },
-                      style: buttonStyle.copyWith(backgroundColor: WidgetStateProperty.all(AppColors.primary)),
-                      child: Text("Login", style: AppTextStyle.whiteS20SemiBold),
-                    ),
+                    child: AppButton(onPress: () {
+                      print("object");
+                    }, text: "Sign in"),
                   ),
 
                   Expanded(
@@ -76,3 +73,4 @@ class Onboarding extends StatelessWidget {
     );
   }
 }
+

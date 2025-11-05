@@ -18,5 +18,7 @@ class AppColors {
   static const Color textBlack = Color(0xFF000000);
   static const Color texTWhite = Color(0xFFFFFFFF);
 
+  //shadow
+  static const Color buttonShadow = Color(0xFFCBD6FF);
 
 }
