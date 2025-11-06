@@ -16,10 +16,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
 
   @override
   void dispose() {
@@ -156,7 +154,10 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     const SizedBox(height: 65),
-                    Text("Or continue with", style: AppTextStyle.blues14SemiBold),
+                    Text(
+                      "Or continue with",
+                      style: AppTextStyle.blues14SemiBold,
+                    ),
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 82.0),

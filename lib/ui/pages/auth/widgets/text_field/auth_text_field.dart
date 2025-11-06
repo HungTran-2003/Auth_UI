@@ -38,7 +38,7 @@ class AuthTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           borderSide: BorderSide(color: Colors.transparent, width: 2.0),
         ),
-        label: Text(labelText ?? ''),
+        hint: Text(labelText ?? ''),
       ),
       obscureText: obscureText,
     );
