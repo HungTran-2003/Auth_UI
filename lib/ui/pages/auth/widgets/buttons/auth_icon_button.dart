@@ -15,9 +15,7 @@ class AuthIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {
-        print("Google");
-      },
+      onPressed: onPressed,
       icon: icon,
       iconSize: 24,
       color: AppColors.textBlack,

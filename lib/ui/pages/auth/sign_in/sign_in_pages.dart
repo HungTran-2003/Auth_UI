@@ -8,16 +8,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../widgets/buttons/app_button.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({super.key});
+
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
 
     return Scaffold(
       body: SizedBox(
@@ -72,116 +86,118 @@ class SignIn extends StatelessWidget {
               padding: const EdgeInsets.only(top: 97, left: 31, right: 31),
               height: screenHeight,
               width: screenWidth,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    spacing: 26,
-                    children: [
-                      Text("Login here", style: AppTextStyle.blues30Bold),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 67.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      spacing: 26,
+                      children: [
+                        Text("Login here", style: AppTextStyle.blues30Bold),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 67.0),
+                          child: Text(
+                            "Welcome back you’ve been missed!",
+                            style: AppTextStyle.blacks20SemiBold,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 74.0),
+                    AuthTextField(
+                      labelText: "Email",
+                      obscureText: false,
+                      controller: _emailController,
+                    ),
+                    const SizedBox(height: 29.0),
+                    AuthTextField(
+                      labelText: "Password",
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
+                    const SizedBox(height: 28.0),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          print("Forgot Password");
+                        },
                         child: Text(
-                          "Welcome back you’ve been missed!",
-                          style: AppTextStyle.blacks20SemiBold,
-                          textAlign: TextAlign.center,
+                          "Forgot your password?",
+                          style: AppTextStyle.blues14SemiBold,
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 74.0),
-                  AuthTextField(
-                    labelText: "Email",
-                    obscureText: false,
-                    controller: _emailController,
-                  ),
-                  const SizedBox(height: 29.0),
-                  AuthTextField(
-                    labelText: "Password",
-                    obscureText: true,
-                    controller: _passwordController,
-                  ),
-                  const SizedBox(height: 28.0),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
+                    ),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: AppButton(
+                              text: "Sign In",
+                              onPress: () {
+                                print("Login");
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextButton(
                       onPressed: () {
-                        print("Forgot Password");
+                        Navigator.pushNamed(context, "/sign_up");
                       },
                       child: Text(
-                        "Forgot your password?",
-                        style: AppTextStyle.blues14SemiBold,
+                        "Create new account",
+                        style: AppTextStyle.blacks14SemiBold,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  SizedBox(
-                    height: 60,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: AppButton(
-                            text: "Sign In",
-                            onPress: () {
-                              print("Login");
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/sign_up");
-                    },
-                    child: Text(
-                      "Create new account",
-                      style: AppTextStyle.blacks14SemiBold,
-                    ),
-                  ),
-                  const SizedBox(height: 65),
-                  Text("Or continue with", style: AppTextStyle.blues14SemiBold),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 82.0),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: SvgPicture.asset(
-                              'assets/vectors/icons8_google.svg',
-                              width: 24,
-                              height: 24,
+                    const SizedBox(height: 65),
+                    Text("Or continue with", style: AppTextStyle.blues14SemiBold),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 82.0),
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: SvgPicture.asset(
+                                'assets/vectors/icons8_google.svg',
+                                width: 24,
+                                height: 24,
+                              ),
+                              onPressed: () {
+                                print("Google");
+                              },
                             ),
-                            onPressed: () {
-                              print("Google");
-                            },
                           ),
-                        ),
 
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: Icon(Icons.facebook),
-                            onPressed: () {
-                              print("facebook");
-                            },
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: Icon(Icons.facebook),
+                              onPressed: () {
+                                print("facebook");
+                              },
+                            ),
                           ),
-                        ),
 
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: Icon(Icons.apple),
-                            onPressed: () {
-                              print("facebook");
-                            },
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: Icon(Icons.apple),
+                              onPressed: () {
+                                print("facebook");
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

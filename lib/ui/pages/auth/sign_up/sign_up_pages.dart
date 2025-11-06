@@ -8,17 +8,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/buttons/auth_icon_button.dart';
 import '../widgets/text_field/auth_text_field.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
-    final _confirmPasswordController = TextEditingController();
 
     return Scaffold(
       body: SizedBox(
@@ -73,113 +86,115 @@ class SignUp extends StatelessWidget {
               padding: const EdgeInsets.only(top: 97, left: 31, right: 31),
               height: screenHeight,
               width: screenWidth,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    spacing: 26,
-                    children: [
-                      Text("Create Account", style: AppTextStyle.blues30Bold),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 51.0),
-                        child: Text(
-                          "Create an account so you can explore all the existing jobs",
-                          style: AppTextStyle.blacks14Medium,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 53.0),
-                  AuthTextField(
-                    labelText: "Email",
-                    obscureText: false,
-                    controller: _emailController,
-                  ),
-                  const SizedBox(height: 26.0),
-                  AuthTextField(
-                    labelText: "Password",
-                    obscureText: true,
-                    controller: _passwordController,
-                  ),
-                  const SizedBox(height: 26.0),
-                  AuthTextField(
-                    labelText: "Confirm Password",
-                    obscureText: true,
-                    controller: _confirmPasswordController,
-                  ),
-                  const SizedBox(height: 50),
-                  SizedBox(
-                    height: 60,
-                    child: Row(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      spacing: 26,
                       children: [
-                        Expanded(
-                          child: AppButton(
-                            text: "Sign Up",
-                            onPress: () {
-                              print("Login");
-                            },
+                        Text("Create Account", style: AppTextStyle.blues30Bold),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 51.0),
+                          child: Text(
+                            "Create an account so you can explore all the existing jobs",
+                            style: AppTextStyle.blacks14Medium,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  TextButton(
-                    onPressed: () {
-                      if (Navigator.canPop(context)) {
-                        Navigator.pop(context);
-                      } else {
-                        Navigator.pushReplacementNamed(context, "/sign_in");
-                      }
-                    },
-                    child: Text(
-                      "Already have an account",
-                      style: AppTextStyle.blacks14SemiBold,
+                    const SizedBox(height: 53.0),
+                    AuthTextField(
+                      labelText: "Email",
+                      obscureText: false,
+                      controller: _emailController,
                     ),
-                  ),
-                  const SizedBox(height: 65),
-                  Text("Or continue with", style: AppTextStyle.blues14SemiBold),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 82.0),
-                    child: Row(
-                      spacing: 10,
-                      children: [
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: SvgPicture.asset(
-                              'assets/vectors/icons8_google.svg',
-                              width: 24,
-                              height: 24,
+                    const SizedBox(height: 26.0),
+                    AuthTextField(
+                      labelText: "Password",
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
+                    const SizedBox(height: 26.0),
+                    AuthTextField(
+                      labelText: "Confirm Password",
+                      obscureText: true,
+                      controller: _confirmPasswordController,
+                    ),
+                    const SizedBox(height: 50),
+                    SizedBox(
+                      height: 60,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: AppButton(
+                              text: "Sign Up",
+                              onPress: () {
+                                print("Login");
+                              },
                             ),
-                            onPressed: () {
-                              print("Google");
-                            },
                           ),
-                        ),
-
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: Icon(Icons.facebook),
-                            onPressed: () {
-                              print("facebook");
-                            },
-                          ),
-                        ),
-
-                        Expanded(
-                          child: AuthIconButton(
-                            icon: Icon(Icons.apple),
-                            onPressed: () {
-                              print("facebook");
-                            },
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 30),
+                    TextButton(
+                      onPressed: () {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        } else {
+                          Navigator.pushReplacementNamed(context, "/sign_in");
+                        }
+                      },
+                      child: Text(
+                        "Already have an account",
+                        style: AppTextStyle.blacks14SemiBold,
+                      ),
+                    ),
+                    const SizedBox(height: 65),
+                    Text("Or continue with", style: AppTextStyle.blues14SemiBold),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 82.0),
+                      child: Row(
+                        spacing: 10,
+                        children: [
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: SvgPicture.asset(
+                                'assets/vectors/icons8_google.svg',
+                                width: 24,
+                                height: 24,
+                              ),
+                              onPressed: () {
+                                print("Google");
+                              },
+                            ),
+                          ),
+                
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: Icon(Icons.facebook),
+                              onPressed: () {
+                                print("facebook");
+                              },
+                            ),
+                          ),
+                
+                          Expanded(
+                            child: AuthIconButton(
+                              icon: Icon(Icons.apple),
+                              onPressed: () {
+                                print("facebook");
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
