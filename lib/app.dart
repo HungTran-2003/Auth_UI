@@ -1,4 +1,4 @@
-import 'package:auth_ui/ui/pages/app_start/onboarding_pages.dart';
+import 'package:auth_ui/ui/pages/app_start/onboarding/onboarding_pages.dart';
 import 'package:auth_ui/ui/pages/auth/sign_in/sign_in_pages.dart';
 import 'package:auth_ui/ui/pages/auth/sign_up/sign_up_pages.dart';
 import 'package:flutter/material.dart';

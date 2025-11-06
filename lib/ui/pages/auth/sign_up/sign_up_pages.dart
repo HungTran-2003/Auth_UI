@@ -1,11 +1,15 @@
 import 'package:auth_ui/common/app_colors.dart';
 import 'package:auth_ui/common/app_text_style.dart';
+import 'package:auth_ui/ui/widgets/buttons/app_button.dart';
 import 'package:auth_ui/ui/widgets/decoration/app_shape_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../widgets/buttons/auth_icon_button.dart';
+import '../widgets/text_field/auth_text_field.dart';
+
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +20,8 @@ class SignUp extends StatelessWidget {
     final _passwordController = TextEditingController();
     final _confirmPasswordController = TextEditingController();
 
-
-    final buttonStyle = ElevatedButton.styleFrom(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-    );
-
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: screenHeight,
         width: screenWidth,
         child: Stack(
@@ -85,136 +84,50 @@ class SignUp extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 51.0),
                         child: Text(
                           "Create an account so you can explore all the existing jobs",
-                          style: AppTextStyle.blackS14Medium,
+                          style: AppTextStyle.blacks14Medium,
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 53.0),
-                  TextField(
+                  AuthTextField(
+                    labelText: "Email",
+                    obscureText: false,
                     controller: _emailController,
-                    style: AppTextStyle.blackS16Medium,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondary,
-                      contentPadding: EdgeInsets.only(
-                        left: 20.0,
-                        right: 35.0,
-                        top: 20.0,
-                        bottom: 20.0,
-                      ),
-                      floatingLabelStyle: AppTextStyle.blackS16,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: AppColors.primary,
-                          width: 2.0,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 2.0,
-                        ),
-                      ),
-                      label: Text("Email"),
-                    ),
                   ),
                   const SizedBox(height: 26.0),
-                  TextField(
+                  AuthTextField(
+                    labelText: "Password",
+                    obscureText: true,
                     controller: _passwordController,
-                    style: AppTextStyle.blackS16Medium,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondary,
-                      contentPadding: EdgeInsets.only(
-                        left: 20.0,
-                        right: 35.0,
-                        top: 20.0,
-                        bottom: 20.0,
-                      ),
-                      floatingLabelStyle: AppTextStyle.blackS16,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: AppColors.primary,
-                          width: 2.0,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 2.0,
-                        ),
-                      ),
-                      label: Text("Password"),
-                    ),
-                    obscureText: true,
                   ),
                   const SizedBox(height: 26.0),
-                  TextField(
-                    controller: _confirmPasswordController,
-                    style: AppTextStyle.blackS16Medium,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondary,
-                      contentPadding: EdgeInsets.only(
-                        left: 20.0,
-                        right: 35.0,
-                        top: 20.0,
-                        bottom: 20.0,
-                      ),
-                      floatingLabelStyle: AppTextStyle.blackS16,
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: AppColors.primary,
-                          width: 2.0,
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 2.0,
-                        ),
-                      ),
-                      label: Text("Confirm Password"),
-                    ),
+                  AuthTextField(
+                    labelText: "Confirm Password",
                     obscureText: true,
+                    controller: _confirmPasswordController,
                   ),
                   const SizedBox(height: 50),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: buttonStyle.copyWith(
-                            minimumSize: WidgetStateProperty.all(
-                              const Size(0, 60),
-                            ),
-                            backgroundColor: WidgetStateProperty.all(
-                              AppColors.primary,
-                            ),
-                            elevation: WidgetStateProperty.all(10.0),
-                          ),
-                          onPressed: () {
-                            print("Sign In");
-                          },
-                          child: Text(
-                            "Sign Up",
-                            style: AppTextStyle.whiteS20SemiBold,
+                  SizedBox(
+                    height: 60,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: AppButton(
+                            text: "Sign Up",
+                            onPress: () {
+                              print("Login");
+                            },
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 30),
                   TextButton(
                     onPressed: () {
-                      if(Navigator.canPop(context)){
+                      if (Navigator.canPop(context)) {
                         Navigator.pop(context);
                       } else {
                         Navigator.pushReplacementNamed(context, "/sign_in");
@@ -222,7 +135,7 @@ class SignUp extends StatelessWidget {
                     },
                     child: Text(
                       "Already have an account",
-                      style: AppTextStyle.blackS14SemiBold,
+                      style: AppTextStyle.blacks14SemiBold,
                     ),
                   ),
                   const SizedBox(height: 65),
@@ -234,79 +147,33 @@ class SignUp extends StatelessWidget {
                       spacing: 10,
                       children: [
                         Expanded(
-                          child: IconButton(
-                            onPressed: () {
-                              print("Google");
-                            },
+                          child: AuthIconButton(
                             icon: SvgPicture.asset(
                               'assets/vectors/icons8_google.svg',
                               width: 24,
                               height: 24,
                             ),
-                            iconSize: 24,
-                            color: AppColors.textBlack,
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStateProperty.all(
-                                AppColors.buttonBGSecondary,
-                              ),
-                              shape: WidgetStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              minimumSize: WidgetStateProperty.all(
-                                const Size(0, 44),
-                              ),
-
-                            ),
+                            onPressed: () {
+                              print("Google");
+                            },
                           ),
                         ),
 
                         Expanded(
-                          child: IconButton(
-                            onPressed: () {
-                              print("Fake book");
-                            },
+                          child: AuthIconButton(
                             icon: Icon(Icons.facebook),
-                            iconSize: 24,
-                            color: AppColors.textBlack,
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStateProperty.all(
-                                AppColors.buttonBGSecondary,
-                              ),
-                              shape: WidgetStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              minimumSize: WidgetStateProperty.all(
-                                const Size(0, 44),
-                              ),
-                            ),
+                            onPressed: () {
+                              print("facebook");
+                            },
                           ),
                         ),
 
                         Expanded(
-                          child: IconButton(
-                            onPressed: () {
-                              print("Apple");
-                            },
+                          child: AuthIconButton(
                             icon: Icon(Icons.apple),
-                            iconSize: 24,
-                            color: AppColors.textBlack,
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStateProperty.all(
-                                AppColors.buttonBGSecondary,
-                              ),
-                              shape: WidgetStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              minimumSize: WidgetStateProperty.all(
-                                const Size(0, 44),
-                              ),
-                            ),
+                            onPressed: () {
+                              print("facebook");
+                            },
                           ),
                         ),
                       ],

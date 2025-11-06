@@ -12,6 +12,7 @@ class AppColors {
   //Button
   static const Color buttonBGPrimary = primary;
   static const Color buttonBGSecondary = Color(0xFFECECEC);
+  static const Color textButtonPress = Color(0xFF494949);
 
 
   //Text

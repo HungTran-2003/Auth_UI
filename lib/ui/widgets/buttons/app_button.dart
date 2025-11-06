@@ -7,7 +7,7 @@ class AppButton extends StatefulWidget {
   final VoidCallback onPress;
   final String? text;
 
-  const AppButton({required this.onPress, required this.text});
+  const AppButton({super.key, required this.onPress, required this.text});
 
   @override
   State<AppButton> createState() => _AppButtonSate();
@@ -19,6 +19,9 @@ class _AppButtonSate extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      splashColor: Colors.blue,
+      highlightColor: Colors.blue,
       onTapDown: (detail) {
         setState(() {
           _isPressed = true;
@@ -42,16 +45,18 @@ class _AppButtonSate extends State<AppButton> {
           borderRadius: BorderRadius.circular(10),
           color: AppColors.primary,
           boxShadow: [
-              BoxShadow(
-                color: AppColors.buttonShadow,
-                blurRadius: 20,
-                offset: _isPressed ? Offset(0, 0) : Offset(0, 10),
-              ),
+            BoxShadow(
+              color: _isPressed ? Colors.transparent : AppColors.primary,
+              blurRadius: 20,
+              offset: Offset(0, 10),
+            ),
           ],
         ),
         child: Text(
           "${widget.text}",
-          style: _isPressed? AppTextStyle.whiteS14SemiBold : AppTextStyle.whiteS20SemiBold,
+          style: _isPressed
+              ? AppTextStyle.whites14SemiBold
+              : AppTextStyle.whites20SemiBold,
         ),
       ),
     );
