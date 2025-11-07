@@ -33,6 +33,8 @@ class _SignUpState extends State<SignUp> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: SizedBox(
         height: screenHeight,
@@ -105,22 +107,11 @@ class _SignUpState extends State<SignUp> {
                       ],
                     ),
                     const SizedBox(height: 53.0),
-                    AuthTextField(
-                      labelText: "Email",
-                      obscureText: false,
-                      controller: _emailController,
-                    ),
-                    const SizedBox(height: 26.0),
-                    AuthTextField(
-                      labelText: "Password",
-                      obscureText: true,
-                      controller: _passwordController,
-                    ),
-                    const SizedBox(height: 26.0),
-                    AuthTextField(
-                      labelText: "Confirm Password",
-                      obscureText: true,
-                      controller: _confirmPasswordController,
+                    FormSignUpTextField(
+                      formKey: _formKey,
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                      confirmPasswordController: _confirmPasswordController,
                     ),
                     const SizedBox(height: 50),
                     SizedBox(
@@ -131,7 +122,9 @@ class _SignUpState extends State<SignUp> {
                             child: AppButton(
                               text: "Sign Up",
                               onPress: () {
-                                print("Login");
+                                if (_formKey.currentState!.validate()) {
+                                  print("Sign up");
+                                }
                               },
                             ),
                           ),
@@ -153,52 +146,111 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     const SizedBox(height: 65),
-                    Text("Or continue with", style: AppTextStyle.blues14SemiBold),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 82.0),
-                      child: Row(
-                        spacing: 10,
-                        children: [
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: SvgPicture.asset(
-                                'assets/vectors/icons8_google.svg',
-                                width: 24,
-                                height: 24,
-                              ),
-                              onPressed: () {
-                                print("Google");
-                              },
-                            ),
-                          ),
-                
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: Icon(Icons.facebook),
-                              onPressed: () {
-                                print("facebook");
-                              },
-                            ),
-                          ),
-                
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: Icon(Icons.apple),
-                              onPressed: () {
-                                print("facebook");
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      "Or continue with",
+                      style: AppTextStyle.blues14SemiBold,
                     ),
+                    const SizedBox(height: 20),
+                    SignUpIconButtons(),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SignUpIconButtons extends StatelessWidget {
+  const SignUpIconButtons({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 82.0),
+      child: Row(
+        spacing: 10,
+        children: [
+          Expanded(
+            child: AuthIconButton(
+              icon: SvgPicture.asset(
+                'assets/vectors/icons8_google.svg',
+                width: 24,
+                height: 24,
+              ),
+              onPressed: () {
+                print("Google");
+              },
+            ),
+          ),
+
+          Expanded(
+            child: AuthIconButton(
+              icon: Icon(Icons.facebook),
+              onPressed: () {
+                print("facebook");
+              },
+            ),
+          ),
+
+          Expanded(
+            child: AuthIconButton(
+              icon: Icon(Icons.apple),
+              onPressed: () {
+                print("facebook");
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FormSignUpTextField extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController confirmPasswordController;
+
+  final GlobalKey<FormState> formKey;
+
+  const FormSignUpTextField({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+    required this.confirmPasswordController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          AuthTextField(
+            hintText: "Email",
+            obscureText: false,
+            controller: emailController,
+          ),
+          const SizedBox(height: 26.0),
+          AuthTextField(
+            hintText: "Password",
+            obscureText: true,
+            controller: passwordController,
+          ),
+          const SizedBox(height: 26.0),
+          AuthTextField(
+            hintText: "Confirm Password",
+            obscureText: true,
+            controller: confirmPasswordController,
+            passwordController: passwordController,
+          ),
+        ],
       ),
     );
   }

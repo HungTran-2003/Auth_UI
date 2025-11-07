@@ -31,6 +31,8 @@ class _SignInState extends State<SignIn> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: SizedBox(
         height: screenHeight,
@@ -103,17 +105,13 @@ class _SignInState extends State<SignIn> {
                       ],
                     ),
                     const SizedBox(height: 74.0),
-                    AuthTextField(
-                      labelText: "Email",
-                      obscureText: false,
-                      controller: _emailController,
+                    // Text Field
+                    FormSignInTextField(
+                      formKey: _formKey,
+                      emailController: _emailController,
+                      passwordController: _passwordController,
                     ),
-                    const SizedBox(height: 29.0),
-                    AuthTextField(
-                      labelText: "Password",
-                      obscureText: true,
-                      controller: _passwordController,
-                    ),
+
                     const SizedBox(height: 28.0),
                     Align(
                       alignment: Alignment.centerRight,
@@ -136,7 +134,9 @@ class _SignInState extends State<SignIn> {
                             child: AppButton(
                               text: "Sign In",
                               onPress: () {
-                                print("Login");
+                                if (_formKey.currentState!.validate()) {
+                                  print("Sign In");
+                                }
                               },
                             ),
                           ),
@@ -159,50 +159,97 @@ class _SignInState extends State<SignIn> {
                       style: AppTextStyle.blues14SemiBold,
                     ),
                     const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 82.0),
-                      child: Row(
-                        spacing: 10,
-                        children: [
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: SvgPicture.asset(
-                                'assets/vectors/icons8_google.svg',
-                                width: 24,
-                                height: 24,
-                              ),
-                              onPressed: () {
-                                print("Google");
-                              },
-                            ),
-                          ),
-
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: Icon(Icons.facebook),
-                              onPressed: () {
-                                print("facebook");
-                              },
-                            ),
-                          ),
-
-                          Expanded(
-                            child: AuthIconButton(
-                              icon: Icon(Icons.apple),
-                              onPressed: () {
-                                print("facebook");
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    SignInIconButtons(),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SignInIconButtons extends StatelessWidget {
+  const SignInIconButtons({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 82.0),
+      child: Row(
+        spacing: 10,
+        children: [
+          Expanded(
+            child: AuthIconButton(
+              icon: SvgPicture.asset(
+                'assets/vectors/icons8_google.svg',
+                width: 24,
+                height: 24,
+              ),
+              onPressed: () {
+                print("Google");
+              },
+            ),
+          ),
+
+          Expanded(
+            child: AuthIconButton(
+              icon: Icon(Icons.facebook),
+              onPressed: () {
+                print("facebook");
+              },
+            ),
+          ),
+
+          Expanded(
+            child: AuthIconButton(
+              icon: Icon(Icons.apple),
+              onPressed: () {
+                print("facebook");
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FormSignInTextField extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  final GlobalKey<FormState> formKey;
+
+  const FormSignInTextField({
+    super.key,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          AuthTextField(
+            hintText: "Email",
+            obscureText: false,
+            controller: emailController,
+          ),
+          const SizedBox(height: 29.0),
+          AuthTextField(
+            hintText: "Password",
+            controller: passwordController,
+            obscureText: true,
+          ),
+        ],
       ),
     );
   }

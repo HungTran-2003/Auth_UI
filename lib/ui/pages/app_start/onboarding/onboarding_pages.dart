@@ -104,7 +104,7 @@ class Onboarding extends StatelessWidget {
                         onPress: () {
                           Navigator.pushReplacementNamed(context, "/sign_in");
                         },
-                        text: "Sign in",
+                        text: "Login",
                       ),
                     ),
                     Expanded(
